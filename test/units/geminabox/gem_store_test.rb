@@ -40,6 +40,15 @@ module Geminabox
       end
     end
 
+    test "#dest_filename" do
+      Geminabox.data = '/root/path'
+      file = File.open(GemFactory.gem_file(:example))
+      incoming_gem = Geminabox::IncomingGem.new(file)
+      subject = GemStore.new incoming_gem
+
+      assert_equal '/root/path/gems/example-1.0.0.gem', subject.send(:dest_filename)
+    end
+
     private
     def assert_gem_store_error(code, message, &block)
       assert_raises GemStoreError do

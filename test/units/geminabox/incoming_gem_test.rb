@@ -38,13 +38,6 @@ module Geminabox
       assert_equal "example-1.0.0-x86_64-linux.gem", subject.name
     end
 
-    test "#dest_filename" do
-      file = File.open(GemFactory.gem_file(:example))
-      subject = Geminabox::IncomingGem.new(file, "/root/path")
-
-      assert_equal '/root/path/gems/example-1.0.0.gem', subject.dest_filename
-    end
-
     test "#hexdigest" do
       file_name = GemFactory.gem_file(:example)
       file = File.open(file_name)
