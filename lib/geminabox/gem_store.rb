@@ -1,5 +1,10 @@
 module Geminabox
 
+  # Actual public interface of the store contains the following messages:
+  # - create
+  # - delete
+  # - update_local_file
+
   class GemStore
     attr_accessor :gem, :overwrite
 
