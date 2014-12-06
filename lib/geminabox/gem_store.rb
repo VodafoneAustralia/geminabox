@@ -14,12 +14,15 @@ module Geminabox
     end
 
     def self.delete(path_info)
-      full_path = File.expand_path File.join Geminabox.data, *path_info
-      File.delete full_path
+      File.delete local_path path_info
     end
 
     def self.update_local_file(path_info)
       # No action for local file store
+    end
+
+    def self.local_path(path_info)
+      File.expand_path File.join Geminabox.data, *path_info
     end
 
     def initialize(gem, overwrite = false)
