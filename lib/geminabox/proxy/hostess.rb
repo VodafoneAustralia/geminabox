@@ -49,6 +49,7 @@ module Geminabox
       end
 
       get "/gems/*.gem" do
+        Geminabox.store.update_local_file request.path_info
         get_from_rubygems_if_not_local
         serve
       end

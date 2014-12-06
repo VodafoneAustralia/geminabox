@@ -13,6 +13,10 @@ module Geminabox
       File.delete full_path
     end
 
+    def self.update_local_file(path_info)
+      # No action for local file store
+    end
+
     def initialize(gem, overwrite = false)
       @gem = gem
       @overwrite = overwrite && overwrite == 'true'
