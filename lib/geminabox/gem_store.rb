@@ -8,6 +8,11 @@ module Geminabox
       gem_store.save
     end
 
+    def self.delete(path_info)
+      full_path = File.expand_path File.join Geminabox.data, *path_info
+      File.delete full_path
+    end
+
     def initialize(gem, overwrite = false)
       @gem = gem
       @overwrite = overwrite && overwrite == 'true'

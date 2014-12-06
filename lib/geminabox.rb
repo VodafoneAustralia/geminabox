@@ -35,6 +35,7 @@ module Geminabox
     attr_accessor(
       :data,
       :public_folder,
+      :store,
       :build_legacy,
       :incremental_updates,
       :views,
@@ -65,6 +66,7 @@ module Geminabox
   set_defaults(
     data:                 File.join(File.dirname(__FILE__), *%w[.. data]),
     public_folder:        File.join(File.dirname(__FILE__), *%w[.. public]),
+    store:                Geminabox::GemStore,
     build_legacy:         false,
     incremental_updates:  true,
     views:                File.join(File.dirname(__FILE__), *%w[.. views]),

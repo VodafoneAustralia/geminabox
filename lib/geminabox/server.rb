@@ -9,6 +9,7 @@ module Geminabox
 
     delegate_to_geminabox(
       :public_folder,
+      :store,
       :data,
       :build_legacy,
       :incremental_updates,
@@ -115,7 +116,7 @@ module Geminabox
       unless self.class.allow_delete?
         error_response(403, 'Gem deletion is disabled - see https://github.com/cwninja/geminabox/issues/115')
       end
-      File.delete file_path if File.exists? file_path
+      store.delete request.path_info
       self.class.reindex(:force_rebuild)
       redirect url("/")
     end
@@ -142,7 +143,7 @@ module Geminabox
 
     def handle_incoming_gem(gem)
       begin
-        GemStore.create(gem, params[:overwrite])
+        settings.store.create(gem, params[:overwrite])
       rescue GemStoreError => error
         error_response error.code, error.reason
       end
@@ -170,10 +171,6 @@ module Geminabox
 </html>
 HTML
       halt [code, html]
-    end
-
-    def file_path
-      File.expand_path(File.join(settings.data, *request.path_info))
     end
 
     def dependency_cache
