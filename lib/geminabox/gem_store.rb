@@ -4,6 +4,8 @@ module Geminabox
   # - create
   # - delete
   # - update_local_file
+  # - update_local_metadata_file
+  # - reindex
 
   class GemStore
     attr_accessor :gem, :overwrite
@@ -21,8 +23,16 @@ module Geminabox
       # No action for local file store
     end
 
+    def self.update_local_metadata_file(path_info)
+      # No action for local file store
+    end
+
     def self.local_path(path_info)
       File.expand_path File.join Geminabox.data, *path_info
+    end
+
+    def self.reindex
+      yield
     end
 
     def initialize(gem, overwrite = false)

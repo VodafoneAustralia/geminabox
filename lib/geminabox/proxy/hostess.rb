@@ -69,6 +69,7 @@ module Geminabox
       end
 
       def splice_file(file_name)
+        Geminabox.store.update_local_metadata_file request.path_info
         self.file_handler = Splicer.make(file_name)
       end
 
