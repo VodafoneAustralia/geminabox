@@ -118,7 +118,7 @@ module Geminabox
       unless self.class.allow_delete?
         error_response(403, 'Gem deletion is disabled - see https://github.com/cwninja/geminabox/issues/115')
       end
-      store.delete request.path_info
+      settings.store.delete request.path_info
       self.class.reindex(:force_rebuild)
       redirect url("/")
     end
